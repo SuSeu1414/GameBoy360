@@ -132,4 +132,21 @@ public class Registers {
     public void setPc(int pc) {
         this.pc = pc;
     }
+
+    @Override
+    public String toString() {
+        //TODO
+        return "Registers{" +
+                "a=" + a +
+                ", f=" + f +
+                ", b=" + b +
+                ", c=" + c +
+                ", d=" + d +
+                ", e=" + e +
+                ", h=" + h +
+                ", l=" + l +
+                ", sp=" + sp +
+                ", pc=" + pc +
+                '}';
+    }
 }
