@@ -1,5 +1,7 @@
 package pl.suseu.gameboy360.emulator.memory;
 
+
+//Changed my mind. This class will probably be unused
 public class Memory {
 
     private String id = "";
@@ -37,4 +39,19 @@ public class Memory {
         mem[address - start] = value;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public int getEnd() {
+        return end;
+    }
+
+    public int[] getMem() {
+        return mem;
+    }
 }

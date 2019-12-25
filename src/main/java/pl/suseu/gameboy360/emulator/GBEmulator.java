@@ -9,6 +9,14 @@ public class GBEmulator {
 
     public GBEmulator(){
         memoryController = new MemoryController();
-        cpu = new CPU();
+        cpu = new CPU(this);
+    }
+
+    public CPU getCpu() {
+        return cpu;
+    }
+
+    public MemoryController getMemoryController() {
+        return memoryController;
     }
 }
