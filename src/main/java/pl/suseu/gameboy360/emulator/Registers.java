@@ -125,6 +125,22 @@ public class Registers {
         this.sp = sp;
     }
 
+    public void setLowerSp(int lower) {
+        this.sp = (sp & 0xFF00) | (lower);
+    }
+
+    public void setUpperSp(int upper) {
+        this.sp = (sp & 0x00FF) | (upper << 8);
+    }
+
+    public int getLowerSp(){
+        return sp & 0x00FF;
+    }
+
+    public int getUpperSp(){
+        return sp & 0xFF00;
+    }
+
     public int getPc() {
         return pc;
     }
@@ -133,20 +149,24 @@ public class Registers {
         this.pc = pc;
     }
 
+    public void incPc(){
+        pc++;
+    }
+
     @Override
     public String toString() {
         //TODO
         return "Registers{" +
-                "a=" + a +
-                ", f=" + f +
-                ", b=" + b +
-                ", c=" + c +
-                ", d=" + d +
-                ", e=" + e +
-                ", h=" + h +
-                ", l=" + l +
-                ", sp=" + sp +
-                ", pc=" + pc +
+                "a=0x" + Integer.toHexString(a) +
+                ", f=0x" + Integer.toHexString(f) +
+                ", b=0x" + Integer.toHexString(b) +
+                ", c=0x" + Integer.toHexString(c) +
+                ", d=0x" + Integer.toHexString(d) +
+                ", e=0x" + Integer.toHexString(e) +
+                ", h=0x" + Integer.toHexString(h) +
+                ", l=0x" + Integer.toHexString(l) +
+                ", sp=0x" + Integer.toHexString(sp) +
+                ", pc=0x" + Integer.toHexString(pc) +
                 '}';
     }
 }

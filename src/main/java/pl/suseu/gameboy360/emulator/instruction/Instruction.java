@@ -1,11 +1,17 @@
 package pl.suseu.gameboy360.emulator.instruction;
 
 import pl.suseu.gameboy360.emulator.CPU;
+import pl.suseu.gameboy360.emulator.GBEmulator;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Instruction {
 
     private int nextStep = 0;
-    private int stepOutput = 0;
+    private Map<Integer, Integer> stepMemory = new HashMap<>();
 
     private Step[] steps;
     private boolean finished = false;
@@ -14,8 +20,8 @@ public class Instruction {
         this.steps = steps;
     }
 
-    public void doStep(CPU cpu) {
-        steps[nextStep].execute(cpu, this);
+    public void doStep(GBEmulator emulator) {
+        steps[nextStep].execute(emulator, this);
         nextStep++;
         if (steps.length <= nextStep) finished = true;
     }
@@ -24,12 +30,12 @@ public class Instruction {
         return steps;
     }
 
-    public int getStepOutput() {
-        return stepOutput;
+    public void setMem(int index, int value){
+        stepMemory.put(index, value);
     }
 
-    public void setStepOutput(int stepOutput) {
-        this.stepOutput = stepOutput;
+    public int getMem(int index) {
+        return stepMemory.get(index);
     }
 
     public boolean isFinished() {
