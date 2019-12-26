@@ -153,6 +153,51 @@ public class Registers {
         pc++;
     }
 
+    private void setFlag(int value, int flagNum) {
+        value &= 1;
+        if (value == 1) {
+            f |= (1 << flagNum);
+        } else {
+            f = f & ~(1 << flagNum);
+        }
+    }
+
+    private int getFlag(int flagNum) {
+        return (f >>> flagNum) & 0b1;
+    }
+
+    public void setCarryFlag(int value) {
+        setFlag(value, 4);
+    }
+
+    public int getCarryFlag(){
+        return getFlag(4);
+    }
+
+    public void setHalfCarryFlag(int value){
+        setFlag(value, 5);
+    }
+
+    public int getHalfCarryFlag(){
+        return getFlag(5);
+    }
+
+    public void setOperationFlag(int value) {
+        setFlag(value, 6);
+    }
+
+    public int getOperationFlag(){
+        return getFlag(6);
+    }
+
+    public void setZeroFlag(int value){
+        setFlag(value, 7);
+    }
+
+    public int getZeroFlag(){
+        return getFlag(7);
+    }
+
     @Override
     public String toString() {
         //TODO

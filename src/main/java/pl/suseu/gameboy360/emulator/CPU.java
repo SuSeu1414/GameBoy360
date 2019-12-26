@@ -31,6 +31,9 @@ public class CPU {
 
             return;
         }
+        if (GBEmulator.DEBUG){
+            System.out.println("Step...");
+        }
         instruction.doStep(emulator);
     }
 

@@ -5,29 +5,25 @@ import pl.suseu.gameboy360.emulator.opcode.Opcodes;
 
 public class Main {
 
+    private static GBEmulator emulator;
+
     public static void main(String[] args) {
         Opcodes.init();
-        GBEmulator emulator = new GBEmulator();
+        emulator = new GBEmulator();
 
-        System.out.println(emulator.getRegisters().toString());
-        emulator.tick();
+        printRegs();
+        emulator.getRegisters().setCarryFlag(1);
+        printRegs();
+        emulator.getRegisters().setCarryFlag(0);
+        printRegs();
 
-        emulator.tick();
-        System.out.println(emulator.getRegisters().toString());
+        while (true) {
+            emulator.tick();
+            printRegs();
+        }
+    }
 
-        emulator.tick();
-        System.out.println(emulator.getRegisters().toString());
-
-        emulator.tick();
-        System.out.println(emulator.getRegisters().toString());
-
-        emulator.tick();
-        System.out.println(emulator.getRegisters().toString());
-
-        emulator.tick();
-        System.out.println(emulator.getRegisters().toString());
-
-        emulator.tick();
+    public static void printRegs() {
         System.out.println(emulator.getRegisters().toString());
     }
 
