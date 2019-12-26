@@ -10,7 +10,10 @@ public class PrefixedUtils {
         int bit = (value >>> b) & 1;
         gb.getRegisters().setOperationFlag(0);
         gb.getRegisters().setHalfCarryFlag(1);
-        if (bit == 0) gb.getRegisters().setZeroFlag(1);
+        if (bit == 0)
+            gb.getRegisters().setZeroFlag(1);
+        else
+            gb.getRegisters().setZeroFlag(0);
     }
 
     public static void setBit(GBEmulator gb, Register r, int b, int addr) {
