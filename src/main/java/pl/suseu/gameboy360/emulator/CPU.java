@@ -25,7 +25,7 @@ public class CPU {
             instruction = new Instruction(opcode.getSteps());
 
             if (GBEmulator.DEBUG) {
-                System.out.print("[" + registers.getPc() + "] ");
+                System.out.print("[" + registers.getPc() + "] 0x" + Integer.toHexString(emulator.getValueAtPc()) + ": ");
                 System.out.println(opcode.getName());
             }
 

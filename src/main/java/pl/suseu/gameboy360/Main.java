@@ -12,11 +12,6 @@ public class Main {
         emulator = new GBEmulator();
 
         printRegs();
-        emulator.getRegisters().setCarryFlag(1);
-        printRegs();
-        emulator.getRegisters().setCarryFlag(0);
-        printRegs();
-
         while (true) {
             emulator.tick();
             printRegs();
@@ -24,7 +19,7 @@ public class Main {
     }
 
     public static void printRegs() {
-        System.out.println(emulator.getRegisters().toString());
+        emulator.getRegisters().print();
     }
 
 }

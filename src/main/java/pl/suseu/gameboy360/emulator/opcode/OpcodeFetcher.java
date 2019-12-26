@@ -17,7 +17,7 @@ public class OpcodeFetcher {
         for (Map.Entry<OpcodeMask, Opcode> entry : Opcodes.getOpcodes().entrySet()){
             if (entry.getKey().matches(op)) return entry.getValue();
         }
-        System.out.println("Unknown opcode: 0x" + Integer.toHexString(op));
+        System.err.println("Unknown opcode: 0x" + Integer.toHexString(op));
         System.exit(2);
         return null;
     }

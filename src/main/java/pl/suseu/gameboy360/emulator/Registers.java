@@ -153,6 +153,10 @@ public class Registers {
         pc++;
     }
 
+    public void resetFlags(){
+        f &= 0b00001111;
+    }
+
     private void setFlag(int value, int flagNum) {
         value &= 1;
         if (value == 1) {
@@ -198,10 +202,9 @@ public class Registers {
         return getFlag(7);
     }
 
-    @Override
-    public String toString() {
+    public void print() {
         //TODO
-        return "Registers{" +
+        System.out.println("Registers{" +
                 "a=0x" + Integer.toHexString(a) +
                 ", f=0x" + Integer.toHexString(f) +
                 ", b=0x" + Integer.toHexString(b) +
@@ -212,6 +215,6 @@ public class Registers {
                 ", l=0x" + Integer.toHexString(l) +
                 ", sp=0x" + Integer.toHexString(sp) +
                 ", pc=0x" + Integer.toHexString(pc) +
-                '}';
+                '}');
     }
 }
