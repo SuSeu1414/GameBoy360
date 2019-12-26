@@ -2,6 +2,10 @@ package pl.suseu.gameboy360.emulator.instruction.ins;
 
 import pl.suseu.gameboy360.emulator.opcode.Opcode;
 
+/*
+    Opcodes:
+    0x8
+ */
 public class Load_SP_To_Address extends Opcode {
     public Load_SP_To_Address() {
         super("LD (nn),SP",

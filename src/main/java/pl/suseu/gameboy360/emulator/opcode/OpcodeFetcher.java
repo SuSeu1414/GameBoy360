@@ -2,6 +2,7 @@ package pl.suseu.gameboy360.emulator.opcode;
 
 import pl.suseu.gameboy360.emulator.GBEmulator;
 
+import java.util.Arrays;
 import java.util.Map;
 
 public class OpcodeFetcher {
@@ -15,7 +16,9 @@ public class OpcodeFetcher {
     public Opcode fetch(){
         int op = emulator.getValueAtPc();
         for (Map.Entry<OpcodeMask, Opcode> entry : Opcodes.getOpcodes().entrySet()){
-            if (entry.getKey().matches(op)) return entry.getValue();
+            if (entry.getKey().matches(op)) {
+                return entry.getValue();
+            }
         }
         System.err.println("Unknown opcode: 0x" + Integer.toHexString(op));
         System.exit(2);

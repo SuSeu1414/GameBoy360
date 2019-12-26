@@ -46,6 +46,12 @@ public class GBEmulator {
 
     //---
 
+    public static void debug(String s) {
+        if (DEBUG) {
+            System.out.println(s);
+        }
+    }
+
     public Registers getRegisters(){
         return cpu.getRegisters();
     }

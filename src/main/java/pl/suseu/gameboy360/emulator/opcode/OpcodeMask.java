@@ -17,7 +17,7 @@ public class OpcodeMask {
     }
 
     public boolean matches(int op) {
-        for (int i = 7; i > 0; i--) {
+        for (int i = 7; i >= 0; i--) {
             int bit1 = this.bits[i];
             int bit2 = op & 0b1;
             op >>>= 1;

@@ -3,12 +3,32 @@ package pl.suseu.gameboy360.emulator.instruction.ins;
 import pl.suseu.gameboy360.emulator.GBEmulator;
 import pl.suseu.gameboy360.emulator.opcode.Opcode;
 
+/*
+    Opcodes:
+    0x80 - 0xBF
+ */
 public class ALU_Reg extends Opcode {
 
     public ALU_Reg() {
         super("ALU A,D", (gb, ins) -> {
-                    Destination destination = Destination.get(gb.getValueAtPc() & 0b111);
-                    Operation operation = Operation.get(gb.getValueAtPc() & 0b111000);
+                    int dest = gb.getValueAtPc() & 0b111;
+                    int op = (gb.getValueAtPc() & 0b111000) >>> 3;
+                    Destination destination = Destination.get(dest);
+                    Operation operation = Operation.get(op);
+
+                    if (destination == null) {
+                        System.err.println("ALU DESTINATION IS NULL" +
+                                "(0b" + Integer.toBinaryString(dest) + ")");
+                        System.exit(1);
+                    }
+
+                    if (operation == null) {
+                        System.err.println("ALU OPERATION IS NULL" +
+                                "(0b" + Integer.toBinaryString(op) + ")");
+                        System.exit(1);
+                    }
+
+                    GBEmulator.debug("ALU op=" + operation.toString() + " destination=" + destination.toString());
 
                     if (destination != Destination.HL_ADDR) {
                         int val = 0;
@@ -51,6 +71,7 @@ public class ALU_Reg extends Opcode {
         int result = 0;
         int A = gb.getRegisters().getA();
 
+        GBEmulator.debug("ALU operation... val=" + val + ", a=" + A);
 
         if (operation == Operation.ADD) {
             result = add(gb, A, val);
@@ -91,6 +112,7 @@ public class ALU_Reg extends Opcode {
         if (operation == Operation.CP) {
             sub(gb, A, val); //result is thrown away
         }
+        GBEmulator.debug("Result: " + result);
         return result;
     }
 

@@ -26,7 +26,7 @@ public class Registers {
         f = af & 0xff;
     }
 
-    public int getBC(){
+    public int getBC() {
         return b << 8 | c;
     }
 
@@ -35,7 +35,7 @@ public class Registers {
         c = bc & 0xff;
     }
 
-    public int getDE(){
+    public int getDE() {
         return d << 8 | e;
     }
 
@@ -44,7 +44,7 @@ public class Registers {
         e = de & 0xff;
     }
 
-    public int getHL(){
+    public int getHL() {
         return h << 8 | l;
     }
 
@@ -58,6 +58,7 @@ public class Registers {
     }
 
     public void setA(int a) {
+        GBEmulator.debug("Reg[a]=0x" + Integer.toHexString(a));
         this.a = a;
     }
 
@@ -66,6 +67,7 @@ public class Registers {
     }
 
     public void setF(int f) {
+        GBEmulator.debug("Reg[f]=0x" + Integer.toHexString(f));
         this.f = f;
     }
 
@@ -74,6 +76,7 @@ public class Registers {
     }
 
     public void setB(int b) {
+        GBEmulator.debug("Reg[b]=0x" + Integer.toHexString(b));
         this.b = b;
     }
 
@@ -82,6 +85,7 @@ public class Registers {
     }
 
     public void setC(int c) {
+        GBEmulator.debug("Reg[c]=0x" + Integer.toHexString(c));
         this.c = c;
     }
 
@@ -90,6 +94,7 @@ public class Registers {
     }
 
     public void setD(int d) {
+        GBEmulator.debug("Reg[d]=0x" + Integer.toHexString(d));
         this.d = d;
     }
 
@@ -98,6 +103,7 @@ public class Registers {
     }
 
     public void setE(int e) {
+        GBEmulator.debug("Reg[e]=0x" + Integer.toHexString(e));
         this.e = e;
     }
 
@@ -106,6 +112,7 @@ public class Registers {
     }
 
     public void setH(int h) {
+        GBEmulator.debug("Reg[h]=0x" + Integer.toHexString(h));
         this.h = h;
     }
 
@@ -114,6 +121,7 @@ public class Registers {
     }
 
     public void setL(int l) {
+        GBEmulator.debug("Reg[l]=0x" + Integer.toHexString(l));
         this.l = l;
     }
 
@@ -122,22 +130,23 @@ public class Registers {
     }
 
     public void setSp(int sp) {
+        GBEmulator.debug("Reg[sp]=0x" + Integer.toHexString(sp));
         this.sp = sp;
     }
 
     public void setLowerSp(int lower) {
-        this.sp = (sp & 0xFF00) | (lower);
+        this.setSp((sp & 0xFF00) | (lower));
     }
 
     public void setUpperSp(int upper) {
-        this.sp = (sp & 0x00FF) | (upper << 8);
+        this.setSp((sp & 0x00FF) | (upper << 8));
     }
 
-    public int getLowerSp(){
+    public int getLowerSp() {
         return sp & 0x00FF;
     }
 
-    public int getUpperSp(){
+    public int getUpperSp() {
         return sp & 0xFF00;
     }
 
@@ -149,15 +158,33 @@ public class Registers {
         this.pc = pc;
     }
 
-    public void incPc(){
+    public void incPc() {
         pc++;
     }
 
-    public void resetFlags(){
+    public void resetFlags() {
         f &= 0b00001111;
     }
 
     private void setFlag(int value, int flagNum) {
+        if (GBEmulator.DEBUG) {
+            String flagName = "";
+            switch (flagNum) {
+                case 4:
+                    flagName = "C";
+                    break;
+                case 5:
+                    flagName = "H";
+                    break;
+                case 6:
+                    flagName = "N";
+                    break;
+                case 7:
+                    flagName = "Z";
+                    break;
+            }
+            GBEmulator.debug("Setting flag(" + flagName + ") to " + value);
+        }
         value &= 1;
         if (value == 1) {
             f |= (1 << flagNum);
@@ -174,15 +201,15 @@ public class Registers {
         setFlag(value, 4);
     }
 
-    public int getCarryFlag(){
+    public int getCarryFlag() {
         return getFlag(4);
     }
 
-    public void setHalfCarryFlag(int value){
+    public void setHalfCarryFlag(int value) {
         setFlag(value, 5);
     }
 
-    public int getHalfCarryFlag(){
+    public int getHalfCarryFlag() {
         return getFlag(5);
     }
 
@@ -190,15 +217,15 @@ public class Registers {
         setFlag(value, 6);
     }
 
-    public int getOperationFlag(){
+    public int getOperationFlag() {
         return getFlag(6);
     }
 
-    public void setZeroFlag(int value){
+    public void setZeroFlag(int value) {
         setFlag(value, 7);
     }
 
-    public int getZeroFlag(){
+    public int getZeroFlag() {
         return getFlag(7);
     }
 
