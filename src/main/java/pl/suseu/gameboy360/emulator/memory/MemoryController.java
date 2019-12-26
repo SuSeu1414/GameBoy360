@@ -22,6 +22,7 @@ public class MemoryController {
     }
 
     public void setValue(int address, int value) {
+        GBEmulator.debug("memory[0x" + Integer.toHexString(address) + "]=0x" + Integer.toHexString(value));
         memory[address] = value;
     }
 

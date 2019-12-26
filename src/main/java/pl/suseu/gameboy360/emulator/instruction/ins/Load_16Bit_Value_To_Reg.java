@@ -26,13 +26,13 @@ public class Load_16Bit_Value_To_Reg extends Opcode {
                             "val=0x"+ Integer.toHexString(val));
 
                     if (mode == 0)
-                        gb.getRegisters().setC(val);
+                        gb.getRegisters().setB(val);
                     if (mode == 1)
-                        gb.getRegisters().setE(val);
+                        gb.getRegisters().setD(val);
                     if (mode == 2)
-                        gb.getRegisters().setL(val);
+                        gb.getRegisters().setH(val);
                     if (mode == 3)
-                        gb.getRegisters().setLowerSp(val);
+                        gb.getRegisters().setUpperSp(val);
                 },
                 (gb, ins) -> {
                     int mode = ins.getMem(0);
@@ -43,13 +43,13 @@ public class Load_16Bit_Value_To_Reg extends Opcode {
                             "val=0x"+ Integer.toHexString(val));
 
                     if (mode == 0)
-                        gb.getRegisters().setB(val);
+                        gb.getRegisters().setC(val);
                     if (mode == 1)
-                        gb.getRegisters().setD(val);
+                        gb.getRegisters().setE(val);
                     if (mode == 2)
-                        gb.getRegisters().setH(val);
+                        gb.getRegisters().setL(val);
                     if (mode == 3)
-                        gb.getRegisters().setUpperSp(val);
+                        gb.getRegisters().setLowerSp(val);
 
                     gb.incrementPc();
                 });
