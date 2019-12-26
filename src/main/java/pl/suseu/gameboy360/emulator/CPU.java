@@ -38,6 +38,10 @@ public class CPU {
         instruction.doStep(emulator);
     }
 
+    public OpcodeFetcher getOpcodeFetcher() {
+        return fetcher;
+    }
+
     public Registers getRegisters() {
         return registers;
     }

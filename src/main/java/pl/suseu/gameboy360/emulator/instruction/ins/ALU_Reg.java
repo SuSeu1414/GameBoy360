@@ -54,10 +54,12 @@ public class ALU_Reg extends Opcode {
                     }
                 },
                 (gb, ins) -> {
-                    Destination destination = Destination.get(gb.getValueAtPc() & 0b111);
-                    Operation operation = Operation.get(gb.getValueAtPc() & 0b111000);
+                    int dest = gb.getValueAtPc() & 0b111;
+                    int op = (gb.getValueAtPc() & 0b111000) >>> 3;
+                    Destination destination = Destination.get(dest);
+                    Operation operation = Operation.get(op);
 
-                    if (destination != Destination.HL_ADDR) {
+                    if (destination == Destination.HL_ADDR) {
                         int val = gb.getValueAt(gb.getRegisters().getHL());
                         int result = calc(gb, val, operation);
                         gb.getRegisters().setA(result);
