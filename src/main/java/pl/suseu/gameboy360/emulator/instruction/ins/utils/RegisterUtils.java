@@ -2,7 +2,7 @@ package pl.suseu.gameboy360.emulator.instruction.ins.utils;
 
 import pl.suseu.gameboy360.emulator.GBEmulator;
 
-public class DestinationUtils {
+public class RegisterUtils {
     public static int getFromReg(GBEmulator gb, Register r) {
         switch (r) {
             case A:

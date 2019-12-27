@@ -1,4 +1,4 @@
-package pl.suseu.gameboy360.emulator.instruction.ins.condition;
+package pl.suseu.gameboy360.emulator.instruction.ins.utils;
 
 import pl.suseu.gameboy360.emulator.GBEmulator;
 

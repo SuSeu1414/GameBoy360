@@ -1,7 +1,7 @@
 package pl.suseu.gameboy360.emulator.instruction.ins;
 
 import pl.suseu.gameboy360.emulator.GBEmulator;
-import pl.suseu.gameboy360.emulator.instruction.ins.condition.ConditionUtils;
+import pl.suseu.gameboy360.emulator.instruction.ins.utils.ConditionUtils;
 import pl.suseu.gameboy360.emulator.opcode.Opcode;
 
 public class JumpR extends Opcode {
