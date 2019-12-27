@@ -4,6 +4,6 @@ import pl.suseu.gameboy360.emulator.opcode.Opcode;
 
 public class NOP extends Opcode {
     public NOP() {
-        super("NOP");
+        super("NOP", (emulator, instruction) -> {});
     }
 }

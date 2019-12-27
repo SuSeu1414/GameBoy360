@@ -17,6 +17,7 @@ public class Instruction {
     private boolean finished = false;
 
     public Instruction(Step... steps){
+        if (steps.length == 0) System.out.println("BUUG");
         this.steps = steps;
     }
 

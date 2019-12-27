@@ -13,13 +13,26 @@ public class Main {
 
         printRegs();
         while (true) {
+//            try {
+//                Thread.sleep(10);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
             emulator.tick();
-            printRegs();
+            if (GBEmulator.DEBUG) {
+                printRegs();
+            }
         }
     }
 
     public static void printRegs() {
         emulator.getRegisters().print();
+    }
+
+    public static class Test {
+        public static void main(String[] args) {
+            System.out.println((byte) 0xfb);
+        }
     }
 
 }

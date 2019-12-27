@@ -155,6 +155,7 @@ public class Registers {
     }
 
     public void setPc(int pc) {
+        GBEmulator.debug("PC = 0x" + Integer.toHexString(pc));
         this.pc = pc;
     }
 

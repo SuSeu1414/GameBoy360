@@ -1,6 +1,7 @@
 package pl.suseu.gameboy360.emulator.instruction.ins.prefixed;
 
 import pl.suseu.gameboy360.emulator.GBEmulator;
+import pl.suseu.gameboy360.emulator.instruction.ins.utils.DestinationUtils;
 import pl.suseu.gameboy360.emulator.opcode.Opcode;
 
 public class Bit_Operation extends Opcode {
@@ -11,7 +12,7 @@ public class Bit_Operation extends Opcode {
                     int dest = gb.getValueAtPc() & 0b111;
                     int bit = (gb.getValueAtPc() >>> 3) & 0b111;
                     int op = (gb.getValueAtPc() >>> 6) & 0b11;
-                    PrefixedUtils.Register reg = PrefixedUtils.Register.get(dest);
+                    DestinationUtils.Register reg = DestinationUtils.Register.get(dest);
                     Operation operation = Operation.get(op);
 
                     if (reg == null) {
@@ -30,7 +31,7 @@ public class Bit_Operation extends Opcode {
                             "bit=" + bit + ", " +
                             "register="+reg.toString());
 
-                    if (reg != PrefixedUtils.Register.HL_ADDR) {
+                    if (reg != DestinationUtils.Register.HL_ADDR) {
                         if (operation == Operation.TEST) {
                             PrefixedUtils.testBit(gb, reg, bit, 0);
                         }
@@ -48,7 +49,7 @@ public class Bit_Operation extends Opcode {
                     //no need to check if it's HL_ADDR
                     int bit = (gb.getValueAtPc() >>> 3) & 0b111;
                     int op = (gb.getValueAtPc() >>> 6) & 0b11;
-                    PrefixedUtils.Register reg = PrefixedUtils.Register.HL_ADDR;
+                    DestinationUtils.Register reg = DestinationUtils.Register.HL_ADDR;
                     Operation operation = Operation.get(op);
                     int addr = gb.getRegisters().getHL();
 

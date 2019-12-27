@@ -19,6 +19,8 @@ public class Opcodes {
         opcodes.put(new OpcodeMask(1, 0, -1, -1, -1, -1, -1, -1), new ALU_Reg());
         opcodes.put(new OpcodeMask(0, 0, 1, -1, -1, 0, 1, 0), new Load_HL_And_Adjust());
         opcodes.put(new OpcodeMask(1, 1, 0, 0, 1, 0, 1, 1), new Prefix());
+        opcodes.put(new OpcodeMask(0, 0, 0, 1, 1, 0, 0 ,0), new JumpR());
+        opcodes.put(new OpcodeMask(0, 0, 1, -1, -1, 0, 0 ,0), new JumpR());
 
         prefixedOpcodes.put(new OpcodeMask(0, 1, -1, -1, -1, -1, -1, -1), new Bit_Operation());
         prefixedOpcodes.put(new OpcodeMask(1, 0, -1, -1, -1, -1, -1, -1), new Bit_Operation());

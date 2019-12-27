@@ -4,7 +4,7 @@ import pl.suseu.gameboy360.emulator.memory.MemoryController;
 
 public class GBEmulator {
 
-    public static final boolean DEBUG = true;
+    public static boolean DEBUG = true;
 
     private CPU cpu;
     private MemoryController memoryController;

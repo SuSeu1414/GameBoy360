@@ -25,9 +25,10 @@ public class CPU {
             instruction = new Instruction(opcode.getSteps());
 
             if (GBEmulator.DEBUG) {
-                System.out.println("Fetch...");
-                System.out.print("[" + registers.getPc() + "] 0x" + Integer.toHexString(emulator.getValueAtPc()) + ": ");
-                System.out.println(opcode.getName());
+                System.out.println("\u001B[36m Fetch...");
+                System.out.print("[0x" + Integer.toHexString(registers.getPc()) + "] " +
+                        "0x" + Integer.toHexString(emulator.getValueAtPc()) + ": ");
+                System.out.println("" + opcode.getName() + "\u001B[0m");
             }
 
             return;
