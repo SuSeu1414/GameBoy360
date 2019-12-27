@@ -26,6 +26,7 @@ public class Opcodes {
         opcodes.put(new OpcodeMask(1, 1, 1, -1, 0, 0, 1, 0), new Load_FF00_Plus_C());
         opcodes.put(new OpcodeMask(0, 1, -1, -1, -1, -1, -1, -1), new Load_R_R());
         opcodes.put(new OpcodeMask(0, 0, 0, -1, -1, 0, 1, 0), new Load_From_Address_Register_And_A());
+        opcodes.put(new OpcodeMask(0, 0, -1, -1, -1, 1, 0, -1), new INC_DEC_8bit());
 
         prefixedOpcodes.put(new OpcodeMask(0, 1, -1, -1, -1, -1, -1, -1), new Bit_Operation());
         prefixedOpcodes.put(new OpcodeMask(1, 0, -1, -1, -1, -1, -1, -1), new Bit_Operation());
