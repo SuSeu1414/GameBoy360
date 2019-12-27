@@ -70,6 +70,8 @@ public class Bit_Operation extends Opcode {
                     if (operation == Operation.SET) {
                         PrefixedUtils.setBit(gb, reg, bit);
                     }
+
+                    gb.incrementPc();
                 });
     }
 
