@@ -33,13 +33,13 @@ public class Bit_Operation extends Opcode {
 
                     if (reg != DestinationUtils.Register.HL_ADDR) {
                         if (operation == Operation.TEST) {
-                            PrefixedUtils.testBit(gb, reg, bit, 0);
+                            PrefixedUtils.testBit(gb, reg, bit);
                         }
                         if (operation == Operation.RES) {
-                            PrefixedUtils.resetBit(gb, reg, bit, 0);
+                            PrefixedUtils.resetBit(gb, reg, bit);
                         }
                         if (operation == Operation.SET) {
-                            PrefixedUtils.setBit(gb, reg, bit, 0);
+                            PrefixedUtils.setBit(gb, reg, bit);
                         }
                         gb.incrementPc();
                         ins.setFinished(true);
@@ -51,16 +51,15 @@ public class Bit_Operation extends Opcode {
                     int op = (gb.getValueAtPc() >>> 6) & 0b11;
                     DestinationUtils.Register reg = DestinationUtils.Register.HL_ADDR;
                     Operation operation = Operation.get(op);
-                    int addr = gb.getRegisters().getHL();
 
                     if (operation == Operation.TEST) {
-                        PrefixedUtils.testBit(gb, reg, bit, addr);
+                        PrefixedUtils.testBit(gb, reg, bit);
                     }
                     if (operation == Operation.RES) {
-                        PrefixedUtils.resetBit(gb, reg, bit, addr);
+                        PrefixedUtils.resetBit(gb, reg, bit);
                     }
                     if (operation == Operation.SET) {
-                        PrefixedUtils.setBit(gb, reg, bit, addr);
+                        PrefixedUtils.setBit(gb, reg, bit);
                     }
                     gb.incrementPc();
                 });

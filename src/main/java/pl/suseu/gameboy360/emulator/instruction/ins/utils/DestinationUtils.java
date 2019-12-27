@@ -3,7 +3,7 @@ package pl.suseu.gameboy360.emulator.instruction.ins.utils;
 import pl.suseu.gameboy360.emulator.GBEmulator;
 
 public class DestinationUtils {
-    public static int getFromReg(GBEmulator gb, Register r, int addr) {
+    public static int getFromReg(GBEmulator gb, Register r) {
         switch (r) {
             case A:
                 return gb.getRegisters().getA();
@@ -20,12 +20,12 @@ public class DestinationUtils {
             case L:
                 return gb.getRegisters().getL();
             case HL_ADDR:
-                return gb.getValueAt(addr);
+                return gb.getValueAt(gb.getRegisters().getHL());
         }
         return 0;
     }
 
-    public static void updateReg(GBEmulator gb, Register r, int value, int addr) {
+    public static void updateReg(GBEmulator gb, Register r, int value) {
         switch (r) {
             case A:
                 gb.getRegisters().setA(value);
@@ -49,7 +49,7 @@ public class DestinationUtils {
                 gb.getRegisters().setL(value);
                 break;
             case HL_ADDR:
-                gb.getMemoryController().setValue(addr, value);
+                gb.getMemoryController().setValue(gb.getRegisters().getHL(), value);
                 break;
         }
     }
