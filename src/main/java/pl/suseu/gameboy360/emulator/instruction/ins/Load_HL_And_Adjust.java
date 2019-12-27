@@ -11,15 +11,15 @@ public class Load_HL_And_Adjust extends Opcode {
                     int op = (gb.getValueAtPc() >>> 4) & 1;
                     int dir = (gb.getValueAtPc() >>> 3) & 1;
 
-                    GBEmulator.debug("op=" + (op == 1 ? "DEC" : "INC") + ", " +
-                            "dir=" + (dir == 1 ? "RIGHT" : "LEFT"));
-
                     ins.setMem(0, op);
                     ins.setMem(1, dir);
                 },
                 (gb, ins) -> {
                     int op = ins.getMem(0);
                     int dir = ins.getMem(1);
+
+                    GBEmulator.debug("op=" + (op == 1 ? "DEC" : "INC") + ", " +
+                            "dir=" + (dir == 1 ? "RIGHT" : "LEFT"));
 
                     if (dir == 0) {
                         int val = gb.getRegisters().getA();

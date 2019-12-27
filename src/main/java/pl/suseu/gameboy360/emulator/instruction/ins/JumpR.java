@@ -8,6 +8,7 @@ public class JumpR extends Opcode {
 
     public JumpR() {
         super("JR",
+                (emulator, instruction) -> {}, // fetch
                 (gb, ins) -> {
                     int op = gb.getValueAtPc();
                     int addrR = (byte) gb.incrementPcAndGetValueAtPc();

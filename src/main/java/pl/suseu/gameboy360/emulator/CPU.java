@@ -30,8 +30,6 @@ public class CPU {
                         "0x" + Integer.toHexString(emulator.getValueAtPc()) + ": ");
                 System.out.println("" + opcode.getName() + "\u001B[0m");
             }
-
-            return;
         }
         if (GBEmulator.DEBUG){
             System.out.println("Step...");

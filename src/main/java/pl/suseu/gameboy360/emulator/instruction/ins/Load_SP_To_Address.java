@@ -9,6 +9,7 @@ import pl.suseu.gameboy360.emulator.opcode.Opcode;
 public class Load_SP_To_Address extends Opcode {
     public Load_SP_To_Address() {
         super("LD (nn),SP",
+                (emulator, instruction) -> {}, // fetch
                 (gb, ins) -> {
                     ins.setMem(0, gb.incrementPcAndGetValueAtPc()); //lower bits
                 },
