@@ -54,14 +54,22 @@ public class Bit_Operation extends Opcode {
 
                     if (operation == Operation.TEST) {
                         PrefixedUtils.testBit(gb, reg, bit);
+                        ins.setFinished(true);
+                        gb.incrementPc();
                     }
+                },
+                (gb, ins) -> {
+                    int bit = (gb.getValueAtPc() >>> 3) & 0b111;
+                    int op = (gb.getValueAtPc() >>> 6) & 0b11;
+                    RegisterUtils.Register reg = RegisterUtils.Register.HL_ADDR;
+                    Operation operation = Operation.get(op);
+
                     if (operation == Operation.RES) {
                         PrefixedUtils.resetBit(gb, reg, bit);
                     }
                     if (operation == Operation.SET) {
                         PrefixedUtils.setBit(gb, reg, bit);
                     }
-                    gb.incrementPc();
                 });
     }
 
