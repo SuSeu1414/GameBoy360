@@ -18,10 +18,10 @@ public class Load_FF00_Plus_N extends Opcode {
                     int addrToAdd = ins.getMem(1);
 
                     if (direction == 0) {
-                        gb.getRegisters().setA(gb.getValueAt(0xFF00 + addrToAdd));
+                        gb.getMemoryController().setValue(0xFF00 + addrToAdd, gb.getRegisters().getA());
                     }
                     if (direction == 1) {
-                        gb.getMemoryController().setValue(0xFF00 + addrToAdd, gb.getRegisters().getA());
+                        gb.getRegisters().setA(gb.getValueAt(0xFF00 + addrToAdd));
                     }
 
                     gb.incrementPc();

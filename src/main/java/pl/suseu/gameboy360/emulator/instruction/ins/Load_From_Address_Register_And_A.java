@@ -14,16 +14,17 @@ public class Load_From_Address_Register_And_A extends Opcode {
                     int reg = (op >>> 4) & 1;
 
                     if (dir == 0) {
-                        int val;
-                        if (reg == 0)
-                            val = gb.getRegisters().getBC();
-                        else
-                            val = gb.getRegisters().getDE();
-                        gb.getRegisters().setA(val);
-                    } else {
                         int val = gb.getRegisters().getA();
-                        int addr = reg == 0 ? gb.getRegisters().getBC() : gb.getRegisters().getDE();
+                        int addr;
+                        if (reg == 0)
+                            addr = gb.getRegisters().getBC();
+                        else
+                            addr = gb.getRegisters().getDE();
                         gb.getMemoryController().setValue(addr, val);
+                    } else {
+                        int addr = reg == 0 ? gb.getRegisters().getBC() : gb.getRegisters().getDE();
+                        int val = gb.getValueAt(addr);
+                        gb.getRegisters().setA(val);
                     }
                     gb.incrementPc();
                 });

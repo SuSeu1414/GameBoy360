@@ -21,14 +21,14 @@ public class INC_DEC_8bit extends Opcode {
                         System.exit(1);
                     }
 
-                    gb.getRegisters().setOperationFlag(1);
 
                     if (reg != RegisterUtils.Register.HL_ADDR) {
                         int val = RegisterUtils.getFromReg(gb, reg);
 
-                        setHalfCarry(gb, opID, val);
+                        setFlags(gb, opID, val);
 
                         val += opID == 0 ? 1 : -1;
+                        val &= 0xFF;
 
                         RegisterUtils.updateReg(gb, reg, val);
 
@@ -41,8 +41,12 @@ public class INC_DEC_8bit extends Opcode {
                     int opID = ins.getMem(0);
                     int val = RegisterUtils.getFromReg(gb, RegisterUtils.Register.HL_ADDR);
                     ins.setMem(1, val);
-                    setHalfCarry(gb, opID, val);
+
+                    setFlags(gb, opID, val);
+
                     val += opID == 0 ? 1 : -1;
+                    val &= 0xFF;
+
                     if (val == 0) gb.getRegisters().setZeroFlag(1);
                     ins.setMem(2, val);
                 }, (gb, ins) -> {
@@ -51,19 +55,29 @@ public class INC_DEC_8bit extends Opcode {
                 });
     }
 
-    private static void setHalfCarry(GBEmulator gb, int opID, int val){
+    private static void setFlags(GBEmulator gb, int opID, int val) {
+        gb.getRegisters().setOperationFlag(opID);
         if (opID == 0) {
             if (val == 15)
                 gb.getRegisters().setHalfCarryFlag(1);
             else
                 gb.getRegisters().setHalfCarryFlag(0);
+
+            if (val == 0xFF)
+                gb.getRegisters().setZeroFlag(1);
+            else
+                gb.getRegisters().setZeroFlag(0);
         } else {
 //            if ((((val) ^ (val - 1)) & 0b10000) != 0) { // abomination
-            if((val & 0b1111) == 0) { // less abomination
+            if ((val & 0b1111) == 0)  // less abomination
                 gb.getRegisters().setHalfCarryFlag(1);
-            } else {
+            else
                 gb.getRegisters().setHalfCarryFlag(0);
-            }
+
+            if (val == 1)
+                gb.getRegisters().setZeroFlag(1);
+            else
+                gb.getRegisters().setZeroFlag(0);
         }
     }
 
