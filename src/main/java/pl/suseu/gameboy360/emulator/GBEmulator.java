@@ -13,7 +13,7 @@ public class GBEmulator {
 
     public GBEmulator(){
         memoryController = new MemoryController(this);
-        memoryController.loadCartridge("roms/TETRIS.gb");
+        memoryController.loadCartridge("roms/DrMario.gb");
         cpu = new CPU(this);
     }
 
@@ -23,6 +23,10 @@ public class GBEmulator {
 
     public int getPc(){
         return getRegisters().getPc();
+    }
+
+    public void setPc(int addr){
+        getRegisters().setPc(addr);
     }
 
     public void incrementPc(){
