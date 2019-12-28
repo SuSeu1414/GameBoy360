@@ -31,7 +31,8 @@ public class Main {
 
     public static class Test {
         public static void main(String[] args) {
-            System.out.println((byte) 0xfb);
+            byte b = -120;
+            System.out.println((b & 0xFF));
         }
     }
 

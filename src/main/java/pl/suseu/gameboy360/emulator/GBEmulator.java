@@ -1,6 +1,8 @@
 package pl.suseu.gameboy360.emulator;
 
+import pl.suseu.gameboy360.emulator.memory.Memory;
 import pl.suseu.gameboy360.emulator.memory.MemoryController;
+import pl.suseu.gameboy360.util.Utils;
 
 public class GBEmulator {
 
@@ -11,6 +13,7 @@ public class GBEmulator {
 
     public GBEmulator(){
         memoryController = new MemoryController(this);
+        memoryController.loadCartridge("roms/TETRIS.gb");
         cpu = new CPU(this);
     }
 
