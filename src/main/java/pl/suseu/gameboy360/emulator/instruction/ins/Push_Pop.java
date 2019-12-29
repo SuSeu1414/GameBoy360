@@ -64,13 +64,13 @@ public class Push_Pop extends Opcode {
                         gb.getRegisters().setSp(sp);
 
                         if (reg == 0)
-                            gb.getMemoryController().setValue(sp , gb.getRegisters().getC());
+                            gb.getMemoryController().setValue(sp , gb.getRegisters().getB());
                         if (reg == 1)
-                            gb.getMemoryController().setValue(sp , gb.getRegisters().getE());
+                            gb.getMemoryController().setValue(sp , gb.getRegisters().getD());
                         if (reg == 2)
-                            gb.getMemoryController().setValue(sp , gb.getRegisters().getL());
+                            gb.getMemoryController().setValue(sp , gb.getRegisters().getH());
                         if (reg == 3)
-                            gb.getMemoryController().setValue(sp , gb.getRegisters().getF());
+                            gb.getMemoryController().setValue(sp , gb.getRegisters().getA());
                     }
                 }, (gb, ins) -> {
                     int reg = ins.getMem(1);
@@ -80,13 +80,13 @@ public class Push_Pop extends Opcode {
                     gb.getRegisters().setSp(sp);
 
                     if (reg == 0)
-                        gb.getMemoryController().setValue(sp , gb.getRegisters().getB());
+                        gb.getMemoryController().setValue(sp , gb.getRegisters().getC());
                     if (reg == 1)
-                        gb.getMemoryController().setValue(sp , gb.getRegisters().getD());
+                        gb.getMemoryController().setValue(sp , gb.getRegisters().getE());
                     if (reg == 2)
-                        gb.getMemoryController().setValue(sp , gb.getRegisters().getH());
+                        gb.getMemoryController().setValue(sp , gb.getRegisters().getL());
                     if (reg == 3)
-                        gb.getMemoryController().setValue(sp , gb.getRegisters().getA());
+                        gb.getMemoryController().setValue(sp , gb.getRegisters().getF());
                 });
     }
 }
