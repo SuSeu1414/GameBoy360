@@ -58,7 +58,8 @@ public class ALU extends Opcode {
                             val = gb.getRegisters().getL();
 
                         int result = calc(gb, val, operation);
-                        gb.getRegisters().setA(result);
+                        if (operation != Operation.CP)
+                            gb.getRegisters().setA(result);
                         gb.incrementPc();
                         ins.setFinished(true);
                     }
@@ -72,7 +73,8 @@ public class ALU extends Opcode {
                     if (destination == Destination.HL_ADDR) {
                         int val = gb.getValueAt(gb.getRegisters().getHL());
                         int result = calc(gb, val, operation);
-                        gb.getRegisters().setA(result);
+                        if (operation != Operation.CP)
+                            gb.getRegisters().setA(result);
                         gb.incrementPc();
                         ins.setFinished(true);
                     }
@@ -83,7 +85,8 @@ public class ALU extends Opcode {
         int result = 0;
         int A = gb.getRegisters().getA();
 
-        GBEmulator.debug("ALU operation... val=" + val + ", a=" + A);
+        GBEmulator.debug("ALU operation... val=0x" + Integer.toHexString(val) + "," +
+                " a=0x" + Integer.toHexString(A));
 
         if (operation == Operation.ADD) {
             result = add(gb, A, val);
@@ -114,7 +117,7 @@ public class ALU extends Opcode {
             result = A ^ val;
         }
         if (operation == Operation.CP) {
-            sub(gb, A, val); //result is thrown away
+            result = sub(gb, A, val);
         }
         result &= 0xFF;
         GBEmulator.debug("Result: " + result);

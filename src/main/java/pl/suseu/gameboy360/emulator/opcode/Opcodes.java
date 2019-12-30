@@ -27,7 +27,7 @@ public class Opcodes {
         opcodes.put(new OpcodeMask(1, 1, 1, -1, 0, 0, 0, 0), new Load_FF00_Plus_N());
         opcodes.put(new OpcodeMask(1, 1, 1, -1, 0, 0, 1, 0), new Load_FF00_Plus_C());
         opcodes.put(new OpcodeMask(0, 1, -1, -1, -1, -1, -1, -1), new Load_R_R());
-        opcodes.put(new OpcodeMask(0, 0, 0, -1, -1, 0, 1, 0), new Load_From_Address_Register_And_A());
+        opcodes.put(new OpcodeMask(0, 0, 0, -1, -1, 0, 1, 0), new Load_Address_Register_And_A());
         opcodes.put(new OpcodeMask(0, 0, -1, -1, -1, 1, 0, -1), new INC_DEC_8bit());
         opcodes.put(new OpcodeMask(1, 1, 0, 0, 1, 1, 0, 1), new Call());
         opcodes.put(new OpcodeMask(1, 1, -1, -1, 0, -1, 0, 1), new Push_Pop());
@@ -35,6 +35,7 @@ public class Opcodes {
         opcodes.put(new OpcodeMask(0, 0, 0, 1, -1, 1, 1, 1), new Rotate_Reg(RegisterUtils.Register.A));
         opcodes.put(new OpcodeMask(0, 0, -1, -1, -1, 0, 1, 1), new INC_DEC_16bit());
         opcodes.put(new OpcodeMask(1, 1, 0, 0, 1, 0, 0, 1), new Return());
+        opcodes.put(new OpcodeMask(1, 1, 1, -1, 1, 0, 1, 0), new Load_16bit_Addr_And_A());
 
         prefixedOpcodes.put(new OpcodeMask(0, 1, -1, -1, -1, -1, -1, -1), new Bit_Operation());
         prefixedOpcodes.put(new OpcodeMask(1, 0, -1, -1, -1, -1, -1, -1), new Bit_Operation());

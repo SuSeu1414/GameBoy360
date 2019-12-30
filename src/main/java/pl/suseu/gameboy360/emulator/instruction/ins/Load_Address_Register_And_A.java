@@ -2,9 +2,9 @@ package pl.suseu.gameboy360.emulator.instruction.ins;
 
 import pl.suseu.gameboy360.emulator.opcode.Opcode;
 
-public class Load_From_Address_Register_And_A extends Opcode {
+public class Load_Address_Register_And_A extends Opcode {
 
-    public Load_From_Address_Register_And_A() {
+    public Load_Address_Register_And_A() {
         super("LD ( (R),A )/( A,(R) )",
                 (emulator, instruction) -> {
                 }, // fetch
