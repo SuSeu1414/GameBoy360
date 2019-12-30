@@ -32,6 +32,8 @@ public class Opcodes {
         opcodes.put(new OpcodeMask(1, 1, -1, -1, 0, -1, 0, 1), new Push_Pop());
         opcodes.put(new OpcodeMask(0, 0, 0, 0, -1, 1, 1, 1), new Rotate_Carry_Reg(RegisterUtils.Register.A));
         opcodes.put(new OpcodeMask(0, 0, 0, 1, -1, 1, 1, 1), new Rotate_Reg(RegisterUtils.Register.A));
+        opcodes.put(new OpcodeMask(0, 0, -1, -1, -1, 0, 1, 1), new INC_DEC_16bit());
+        opcodes.put(new OpcodeMask(1, 1, 0, 0, 1, 0, 0, 1), new Return());
 
         prefixedOpcodes.put(new OpcodeMask(0, 1, -1, -1, -1, -1, -1, -1), new Bit_Operation());
         prefixedOpcodes.put(new OpcodeMask(1, 0, -1, -1, -1, -1, -1, -1), new Bit_Operation());

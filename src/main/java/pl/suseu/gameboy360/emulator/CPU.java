@@ -6,6 +6,7 @@ import pl.suseu.gameboy360.emulator.opcode.OpcodeFetcher;
 
 public class CPU {
 
+    private long ticks = 0;
     private GBEmulator emulator;
     private Registers registers;
 
@@ -20,6 +21,7 @@ public class CPU {
 
     //one cycle @ 1MHz
     public void tick() {
+        ticks++;
         if (instruction == null || instruction.isFinished()) {
             Opcode opcode = fetcher.fetch();
             instruction = new Instruction(opcode.getSteps());
@@ -32,9 +34,11 @@ public class CPU {
             }
         }
         if (GBEmulator.DEBUG){
-            System.out.println("Step...");
+            System.out.println("Step... (" + ticks + ")");
         }
         instruction.doStep(emulator);
+        if (ticks == 60_000)
+            System.exit(1);
     }
 
     public OpcodeFetcher getOpcodeFetcher() {
