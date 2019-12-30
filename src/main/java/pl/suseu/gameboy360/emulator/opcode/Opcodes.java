@@ -17,7 +17,8 @@ public class Opcodes {
         opcodes.put(new OpcodeMask(0, 0, 0, 0, 0, 0, 0, 0), new NOP());
         opcodes.put(new OpcodeMask(0, 0, 0, 0, 1, 0, 0, 0), new Load_SP_To_Address());
         opcodes.put(new OpcodeMask(0, 0, -1, -1, 0, 0, 0, 1), new Load_16Bit_Value_To_Reg());
-        opcodes.put(new OpcodeMask(1, 0, -1, -1, -1, -1, -1, -1), new ALU_Reg());
+        opcodes.put(new OpcodeMask(1, 0, -1, -1, -1, -1, -1, -1), new ALU(true));
+        opcodes.put(new OpcodeMask(1, 1, -1, -1, -1, 1, 1, 0), new ALU(false));
         opcodes.put(new OpcodeMask(0, 0, 1, -1, -1, 0, 1, 0), new Load_HL_And_Adjust());
         opcodes.put(new OpcodeMask(1, 1, 0, 0, 1, 0, 1, 1), new Prefix());
         opcodes.put(new OpcodeMask(0, 0, 0, 1, 1, 0, 0, 0), new JumpR());

@@ -37,8 +37,8 @@ public class CPU {
             System.out.println("Step... (" + ticks + ")");
         }
         instruction.doStep(emulator);
-        if (ticks == 60_000)
-            System.exit(1);
+//        if (ticks == 60_000)
+//            System.exit(1);
     }
 
     public OpcodeFetcher getOpcodeFetcher() {

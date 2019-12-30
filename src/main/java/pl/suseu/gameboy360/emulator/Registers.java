@@ -164,6 +164,7 @@ public class Registers {
     }
 
     public void resetFlags() {
+        GBEmulator.debug("Flag reset!");
         f &= 0b00001111;
     }
 

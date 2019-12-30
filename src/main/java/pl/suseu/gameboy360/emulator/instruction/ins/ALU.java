@@ -7,9 +7,9 @@ import pl.suseu.gameboy360.emulator.opcode.Opcode;
     Opcodes:
     0x80 - 0xBF
  */
-public class ALU_Reg extends Opcode {
+public class ALU extends Opcode {
 
-    public ALU_Reg() {
+    public ALU(boolean needDestination) {
         super("ALU A,D", (gb, ins) -> {
                     int dest = gb.getValueAtPc() & 0b111;
                     int op = (gb.getValueAtPc() & 0b111000) >>> 3;
@@ -28,12 +28,22 @@ public class ALU_Reg extends Opcode {
                         System.exit(1);
                     }
 
-                    GBEmulator.debug("ALU op=" + operation.toString() + " destination=" + destination.toString());
+                    if (!needDestination)
+                        destination = null;
+
+                    GBEmulator.debug("ALU op=" + operation.toString() + " " +
+                            "destination=" + (destination != null ? destination.toString() : "immediate value"));
 
                     if (destination != Destination.HL_ADDR) {
                         int val = 0;
                         if (destination == Destination.A)
                             val = gb.getRegisters().getA();
+
+                        if (!needDestination) {
+                            val = gb.incrementPcAndGetValueAtPc();
+                            System.out.println("LOL " + val);
+                        }
+
                         if (destination == Destination.B)
                             val = gb.getRegisters().getB();
                         if (destination == Destination.C)
@@ -90,31 +100,29 @@ public class ALU_Reg extends Opcode {
             result = sub(gb, A, val);
         }
         if (operation == Operation.AND) {
-            gb.getRegisters().resetFlags();
             result = A & val;
-            if (result == 0) {
-                gb.getRegisters().setZeroFlag(1);
-            }
             gb.getRegisters().setHalfCarryFlag(1);
+            gb.getRegisters().setCarryFlag(0);
+            gb.getRegisters().setOperationFlag(0);
         }
         if (operation == Operation.OR) {
             gb.getRegisters().resetFlags();
             result = A | val;
-            if (result == 0) {
-                gb.getRegisters().setZeroFlag(1);
-            }
         }
         if (operation == Operation.XOR) {
             gb.getRegisters().resetFlags();
             result = A ^ val;
-            if (result == 0) {
-                gb.getRegisters().setZeroFlag(1);
-            }
         }
         if (operation == Operation.CP) {
             sub(gb, A, val); //result is thrown away
         }
+        result &= 0xFF;
         GBEmulator.debug("Result: " + result);
+        if (result == 0) {
+            gb.getRegisters().setZeroFlag(1);
+        } else {
+            gb.getRegisters().setZeroFlag(0);
+        }
         return result;
     }
 
@@ -122,15 +130,16 @@ public class ALU_Reg extends Opcode {
         int result = (A + val) & 0xFF;
         int carryBits = (A ^ val ^ result);
 
-        gb.getRegisters().resetFlags();
+        gb.getRegisters().setOperationFlag(0);
         if (result < A) {
             gb.getRegisters().setCarryFlag(1);
+        } else {
+            gb.getRegisters().setCarryFlag(0);
         }
         if ((carryBits & 0b10000) != 0) {
             gb.getRegisters().setHalfCarryFlag(1);
-        }
-        if (result == 0) {
-            gb.getRegisters().setZeroFlag(1);
+        } else {
+            gb.getRegisters().setHalfCarryFlag(0);
         }
         return result;
     }
@@ -139,15 +148,16 @@ public class ALU_Reg extends Opcode {
         int result = (A - val) & 0xFF;
         int carryBits = (A ^ val ^ result);
 
-        gb.getRegisters().resetFlags();
-        if (result <= A) { // (result > A) - there was borrow
+        gb.getRegisters().setOperationFlag(1);
+        if (A < val) {
             gb.getRegisters().setCarryFlag(1);
+        } else {
+            gb.getRegisters().setCarryFlag(0);
         }
         if ((carryBits & 0b10000) != 0) {
             gb.getRegisters().setHalfCarryFlag(1);
-        }
-        if (result == 0) {
-            gb.getRegisters().setZeroFlag(1);
+        } else {
+            gb.getRegisters().setHalfCarryFlag(0);
         }
         return result;
     }
