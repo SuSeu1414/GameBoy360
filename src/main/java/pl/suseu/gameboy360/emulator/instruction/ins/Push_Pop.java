@@ -1,7 +1,6 @@
 package pl.suseu.gameboy360.emulator.instruction.ins;
 
 import pl.suseu.gameboy360.emulator.GBEmulator;
-import pl.suseu.gameboy360.emulator.instruction.Step;
 import pl.suseu.gameboy360.emulator.opcode.Opcode;
 
 public class Push_Pop extends Opcode {

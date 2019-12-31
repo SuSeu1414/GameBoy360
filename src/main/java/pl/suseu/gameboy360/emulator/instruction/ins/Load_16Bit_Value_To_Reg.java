@@ -14,7 +14,7 @@ public class Load_16Bit_Value_To_Reg extends Opcode {
 
     public Load_16Bit_Value_To_Reg() {
         super("LD R,N(16)",
-                (emulator, instruction) -> {}, // fetch
+                (gb, instruction) -> {}, // fetch
                 (gb, ins) -> {
                     // 0 - BC, 1 - DE, 2 - HL, 3 - SP
                     int mode = (gb.getValueAtPc() >> 4) & 0b11;

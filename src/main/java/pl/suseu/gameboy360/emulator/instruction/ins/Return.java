@@ -5,7 +5,7 @@ import pl.suseu.gameboy360.emulator.opcode.Opcode;
 public class Return extends Opcode {
 
     public Return(){
-        super("RET", (emulator, instruction) -> {}, // fetch
+        super("RET", (gb, instruction) -> {}, // fetch
                 (gb, ins) -> {
                     int lower = gb.getValueAt(gb.getRegisters().getSp());
                     gb.getRegisters().setSp(gb.getRegisters().getSp() + 1);

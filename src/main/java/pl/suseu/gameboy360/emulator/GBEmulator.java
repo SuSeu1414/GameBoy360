@@ -1,20 +1,33 @@
 package pl.suseu.gameboy360.emulator;
 
-import pl.suseu.gameboy360.emulator.memory.Memory;
+import pl.suseu.gameboy360.emulator.gpu.GPU;
+import pl.suseu.gameboy360.emulator.gpu.GPUApplet;
 import pl.suseu.gameboy360.emulator.memory.MemoryController;
-import pl.suseu.gameboy360.util.Utils;
+import processing.core.PApplet;
 
 public class GBEmulator {
 
     public static boolean DEBUG = true;
 
+    private GPUApplet gpuApplet;
+    private boolean appletReady = false;
+
     private CPU cpu;
+    private GPU gpu;
+
     private MemoryController memoryController;
 
     public GBEmulator(){
         memoryController = new MemoryController(this);
         memoryController.loadCartridge("roms/DrMario.gb");
         cpu = new CPU(this);
+
+        gpuApplet = new GPUApplet(this);
+        Thread appletThread = new Thread(() -> {
+            PApplet.runSketch(new String[]{"GameBoy360"}, gpuApplet);
+        });
+        appletThread.setName("PApplet");
+        appletThread.start();
     }
 
     public void tick(){
@@ -51,6 +64,10 @@ public class GBEmulator {
         return getValueAtPc();
     }
 
+    public boolean isReady(){
+        return appletReady;
+    }
+
     //---
 
     public static void debug(String s) {
@@ -59,12 +76,24 @@ public class GBEmulator {
         }
     }
 
+    public void setGpuApplet(GPUApplet gpuApplet) {
+        this.gpuApplet = gpuApplet;
+    }
+
+    public GPUApplet getGpuApplet() {
+        return gpuApplet;
+    }
+
     public Registers getRegisters(){
         return cpu.getRegisters();
     }
 
     public CPU getCpu() {
         return cpu;
+    }
+
+    public void setAppletReady(boolean appletReady) {
+        this.appletReady = appletReady;
     }
 
     public MemoryController getMemoryController() {

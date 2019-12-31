@@ -1,11 +1,8 @@
 package pl.suseu.gameboy360.emulator.instruction;
 
-import pl.suseu.gameboy360.emulator.CPU;
 import pl.suseu.gameboy360.emulator.GBEmulator;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Instruction {
@@ -17,12 +14,11 @@ public class Instruction {
     private boolean finished = false;
 
     public Instruction(Step... steps){
-        if (steps.length == 0) System.out.println("BUUG");
         this.steps = steps;
     }
 
-    public void doStep(GBEmulator emulator) {
-        steps[nextStep].execute(emulator, this);
+    public void doStep(GBEmulator gb) {
+        steps[nextStep].execute(gb, this);
         nextStep++;
         if (steps.length <= nextStep) finished = true;
     }

@@ -41,7 +41,6 @@ public class ALU extends Opcode {
 
                         if (!needDestination) {
                             val = gb.incrementPcAndGetValueAtPc();
-                            System.out.println("LOL " + val);
                         }
 
                         if (destination == Destination.B)

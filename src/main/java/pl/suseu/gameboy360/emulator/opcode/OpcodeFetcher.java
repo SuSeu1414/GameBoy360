@@ -2,20 +2,19 @@ package pl.suseu.gameboy360.emulator.opcode;
 
 import pl.suseu.gameboy360.emulator.GBEmulator;
 
-import java.util.Arrays;
 import java.util.Map;
 
 public class OpcodeFetcher {
 
-    private GBEmulator emulator;
+    private GBEmulator gb;
     private boolean prefixed;
 
-    public OpcodeFetcher(GBEmulator emulator) {
-        this.emulator = emulator;
+    public OpcodeFetcher(GBEmulator gb) {
+        this.gb = gb;
     }
 
     public Opcode fetch(){
-        int op = emulator.getValueAtPc();
+        int op = gb.getValueAtPc();
 
         Map<OpcodeMask, Opcode> ops = prefixed ? Opcodes.getPrefixedOpcodes() : Opcodes.getOpcodes();
 

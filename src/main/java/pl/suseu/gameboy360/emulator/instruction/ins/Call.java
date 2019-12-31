@@ -13,13 +13,13 @@ public class Call extends Opcode {
                     gb.incrementPc();
                     ins.setMem(0, gb.getPc());
                     gb.setPc(addr);
-                }, (emulator, instruction) -> {
+                }, (gb, instruction) -> {
                 }, // wait a cycle
-                (emulator, instruction) -> {
+                (gb, instruction) -> {
                 }, // wait a cycle
-                (emulator, instruction) -> {
+                (gb, instruction) -> {
                 }, // wait a cycle
-                (emulator, instruction) -> {
+                (gb, instruction) -> {
                 }, // wait a cycle
                 (gb, ins) -> {
                     int oldPc = ins.getMem(0);

@@ -6,7 +6,7 @@ public class Load_FF00_Plus_N extends Opcode {
 
     public Load_FF00_Plus_N() {
         super("LD ( ( A,(FF00+N) / (FF00+N),A )",
-                (emulator, instruction) -> {}, // fetch
+                (gb, instruction) -> {}, // fetch
                 (gb, ins) -> {
                     int direction = (gb.getValueAtPc() >>> 4) & 0b1;
                     int addrToAdd = gb.incrementPcAndGetValueAtPc();

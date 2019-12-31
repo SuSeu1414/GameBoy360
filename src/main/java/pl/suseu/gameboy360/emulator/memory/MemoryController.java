@@ -6,13 +6,13 @@ import pl.suseu.gameboy360.emulator.GBEmulator;
 
 public class MemoryController {
 
-    private GBEmulator emulator;
+    private GBEmulator gb;
     private boolean bootRomEnabled = true;
     private int[] memory = new int[0xFFFF+1]; //not sure if +1 is necessary.
     private Cartridge cartridge;
 
-    public MemoryController(GBEmulator emulator){
-        this.emulator = emulator;
+    public MemoryController(GBEmulator gb){
+        this.gb = gb;
 
 //        //copy boot rom
 //        //this will be moved somewhere else probably

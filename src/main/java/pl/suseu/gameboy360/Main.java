@@ -1,38 +1,39 @@
 package pl.suseu.gameboy360;
 
 import pl.suseu.gameboy360.emulator.GBEmulator;
+import pl.suseu.gameboy360.emulator.gpu.GPUApplet;
 import pl.suseu.gameboy360.emulator.opcode.Opcodes;
+import processing.core.PApplet;
 
 public class Main {
 
-    private static GBEmulator emulator;
+    private static GBEmulator gb;
 
     public static void main(String[] args) {
         Opcodes.init();
-        emulator = new GBEmulator();
+        gb = new GBEmulator();
+
+        while (!gb.isReady()) { }
+
 
         printRegs();
-        while (true) {
-//            try {
-//                Thread.sleep(10);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-            emulator.tick();
-            if (GBEmulator.DEBUG) {
-                printRegs();
+        new Thread(() -> {
+            while (true) {
+                gb.tick();
+                if (GBEmulator.DEBUG) {
+                    printRegs();
+                }
             }
-        }
+        }).start();
     }
 
     public static void printRegs() {
-        emulator.getRegisters().print();
+        gb.getRegisters().print();
     }
 
     public static class Test {
         public static void main(String[] args) {
-            byte b = -120;
-            System.out.println((b & 0xFF));
+
         }
     }
 

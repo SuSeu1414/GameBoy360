@@ -6,7 +6,7 @@ public class Load_Address_Register_And_A extends Opcode {
 
     public Load_Address_Register_And_A() {
         super("LD ( (R),A )/( A,(R) )",
-                (emulator, instruction) -> {
+                (gb, instruction) -> {
                 }, // fetch
                 (gb, ins) -> {
                     int op = gb.getValueAtPc();
