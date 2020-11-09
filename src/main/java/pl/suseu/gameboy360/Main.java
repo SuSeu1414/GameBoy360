@@ -14,7 +14,7 @@ public class Main {
         gb = new GBEmulator();
 
         while (!gb.isReady()) { }
-
+// test
 
         printRegs();
         new Thread(() -> {
